@@ -18,7 +18,7 @@ export const uploadFile = async (file?: File, place?: string) => {
 
 			},
 			(error) => {
-				alert(error)
+				return error
 			},
 		)
 
