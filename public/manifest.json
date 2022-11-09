@@ -5,7 +5,7 @@
   "scope": "/",
   "start_url": "/?source=pwa",
   "name": "Earth Index",
-  "short_name": "earthindex",
+  "short_name": "Earth Index",
   "icons": [
 	{
 	  "src": "/icon-192x192.png",
