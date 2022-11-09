@@ -44,6 +44,15 @@ const AnimalAdd = () => {
 		})
 	}
 
+	const handleImageUpload = async (files: FileWithPath[]) => {
+		const file = files[0]
+		if (!file) {
+			return
+		}
+
+		const url = await uploadFile(file , "animals")
+		setImageUrl(url)
+	}
 
 	return (
 		<Page title={`Add Animal`}>
@@ -55,12 +64,7 @@ const AnimalAdd = () => {
 						</div>
 						:
 						<Dropzone
-							onDrop={(files: FileWithPath[]) => {
-								uploadFile(files[0], "animals")
-									.then((imageUrl) => {
-										setImageUrl(imageUrl)
-									})
-							}}
+							onDrop={handleImageUpload}
 							className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
 							<div className="space-y-1 text-center">
 								<svg
