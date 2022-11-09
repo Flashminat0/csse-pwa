@@ -96,6 +96,7 @@ const AnimalAdd = () => {
 						</Dropzone>
 					}
 				</div>
+				{JSON.stringify(imageUrl)}
 				<div className={`mt-4 mx-3`}>
 					<input
 						type="email"
