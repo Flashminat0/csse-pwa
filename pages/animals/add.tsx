@@ -62,10 +62,18 @@ const AnimalAdd = () => {
 	return (
 		<Page title={`Add Animal`}>
 			<main className={`grid grid-rows-6 h-full`}>
-				<div className="row-span-3">
+				<div className="row-span-3 mx-3">
 					{imageUrl ?
 						<div>
-							<img src={imageUrl} alt={'animal'}/>
+							<img
+								className={`rounded-md `}
+								src={imageUrl} alt={'animal'}/>
+							<button
+								onClick={() => setImageUrl("")}
+								className={`mt-5 grid place-items-center rounded-md border border-transparent bg-red-600 w-full py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2`}
+							>
+								Remove Image
+							</button>
 						</div>
 						:
 						<Dropzone
@@ -88,11 +96,11 @@ const AnimalAdd = () => {
 								</svg>
 								<div className="flex text-sm text-gray-600">
 									<label
-										htmlFor="file-upload"
-										className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+										// htmlFor="file-upload"
+										className="relative cursor-pointer rounded-md bg-transparent font-medium text-green-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2 hover:text-green-500"
 									>
 										<span>Upload a file</span>
-										<input id="file-upload" name="file-upload" type="file" className="sr-only"/>
+										{/*<input id="file-upload" name="file-upload" type="file" className="sr-only"/>*/}
 									</label>
 									<p className="pl-1">or drag and drop</p>
 								</div>
