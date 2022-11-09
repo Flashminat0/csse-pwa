@@ -1,5 +1,4 @@
 import Page from "@/components/page"
-import {BiUpload} from "react-icons/bi"
 import {useRouter} from "next/router"
 
 import {Dropzone, FileWithPath} from "@mantine/dropzone";
@@ -7,7 +6,6 @@ import React, {useState} from "react"
 import {uploadFile} from "@/Api/files"
 import {addAnimal} from "@/Api/Animals"
 import {toast} from "react-toastify"
-import SpecificInfoAnimal from "@/components/animals/SpecificInfoAnimal"
 
 
 const AnimalAdd = () => {
@@ -54,16 +52,13 @@ const AnimalAdd = () => {
 		if (!files[0]) {
 			return
 		}
-
-		const image = new Image()
-		image.src = URL.createObjectURL(file)
-		image.onload = () => {
-			uploadFile(file, "animals").then(url => {
+		uploadFile(file, "animals")
+			.then(url => {
 				setImageUrl(url)
-			}).catch(err => {
+			})
+			.catch(err => {
 				toast.error(err)
 			})
-		}
 	}
 
 	return (
