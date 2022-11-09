@@ -44,13 +44,16 @@ const AnimalAdd = () => {
 		})
 	}
 
+	const [fileState, setFileState] = useState("none");
+
 	const handleImageUpload = async (files: FileWithPath[]) => {
 		const file = files[0]
 		if (!file) {
 			return
 		}
-
+		setFileState("uploading")
 		const url = await uploadFile(file , "animals")
+		setFileState("uploaded")
 		setImageUrl(url)
 	}
 
@@ -97,6 +100,8 @@ const AnimalAdd = () => {
 					}
 				</div>
 				{JSON.stringify(imageUrl)}
+				{fileState === "uploading" && <p>Uploading...</p>}
+				{fileState === "uploaded" && <p>Uploaded</p>}
 				<div className={`mt-4 mx-3`}>
 					<input
 						type="email"
