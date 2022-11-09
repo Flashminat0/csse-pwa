@@ -23,7 +23,7 @@ const Add = () => {
 						/>
 					</div>
 					<div className={`col-span-7 m-4 font-normal grid place-items-center`}>
-						GO TO TREE CONTENT
+						ADD TREE CONTENT
 					</div>
 				</div>
 				<div className={`bg-white grid grid-cols-12 p-4 border border-gray-300 mx-4 mb-4`}>
@@ -33,7 +33,7 @@ const Add = () => {
 						/>
 					</div>
 					<div className={`col-span-7 m-4 font-normal grid place-items-center`}>
-						GO TO LOCATION CONTENT
+						ADD LOCATION CONTENT
 					</div>
 				</div>
 				<div className={`bg-white grid grid-cols-12 p-4 border border-gray-300 mx-4 mb-4`}>
@@ -43,7 +43,7 @@ const Add = () => {
 						/>
 					</div>
 					<div className={`col-span-7 m-4 font-normal grid place-items-center`}>
-						GO TO ANIMAL CONTENT
+						ADD ANIMAL CONTENT
 					</div>
 				</div>
 			</div>
