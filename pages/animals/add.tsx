@@ -54,6 +54,7 @@ const AnimalAdd = () => {
 		if (!files[0]) {
 			return
 		}
+
 		const image = new Image()
 		image.src = URL.createObjectURL(file)
 		image.onload = () => {
