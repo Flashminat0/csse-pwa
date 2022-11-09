@@ -2,7 +2,7 @@ import Page from "@/components/page"
 import {BiUpload} from "react-icons/bi"
 import {useRouter} from "next/router"
 
-import {Dropzone} from "@mantine/dropzone";
+import {Dropzone, FileWithPath} from "@mantine/dropzone";
 import React, {useState} from "react"
 import {uploadFile} from "@/Api/files"
 import {addAnimal} from "@/Api/Animals"
@@ -13,29 +13,10 @@ import SpecificInfoAnimal from "@/components/animals/SpecificInfoAnimal"
 const AnimalAdd = () => {
 	const router = useRouter()
 
-	const [imageArray, setImageArray] = useState([])
-	const [imageObjArray, setImageObjArray] = useState([])
-
-	const [image, setImage] = useState(undefined)
-	const [imageObj, setImageObj] = useState(undefined)
-
+	const [imageUrl, setImageUrl] = useState<string | undefined>("")
 	const [nameInput, setNameInput] = useState("")
 	const [scientificNameInput, setScientificNameInput] = useState("")
-	const [typing, setTyping] = useState("")
 	const [descriptionInput, setDescriptionInput] = useState("")
-
-
-	const handleImageUpload = async () => {
-
-
-		return
-	}
-
-
-	const handleImageRemoval = (e: any) => {
-		setImage(undefined)
-		setImageObj(undefined)
-	}
 
 
 	const handleSubmitAnimal = async () => {
@@ -44,42 +25,72 @@ const AnimalAdd = () => {
 			return
 		}
 
-		if (!image) {
+		if (!imageUrl) {
 			toast.error("Please Select an image")
 			return
 		}
 
 
-		await uploadFile(image, "animals")
-			.then((imageUrl) => {
-				addAnimal({
-					nameInput,
-					scientificNameInput,
-					descriptionInput,
-					imageUrl
-				}).then(message => {
-					toast.success(message)
-					// router.push("/animals/")
-				}).catch(err => {
-					toast.error(err)
-				})
-			})
+		addAnimal({
+			nameInput,
+			scientificNameInput,
+			descriptionInput,
+			imageUrl
+		}).then(message => {
+			toast.success(message)
+			// router.push("/animals/")
+		}).catch(err => {
+			toast.error(err)
+		})
 	}
 
 
 	return (
 		<Page title={`Add Animal`}>
 			<main className={`grid grid-rows-6 h-full`}>
-				<div className={`bg-gray-400 row-span-3`}>
-					<div className={`grid place-items-center p-4`}>
-						<p className={`text-3xl font-semibold mb-2`}>Upload Your Images</p>
-						<p>PNG JPG and GIF files are allowed</p>
-					</div>
-					<div
-						className={`h-56 grid place-items-center bg-gray-200 mb-3 border-2 border-gray-600 border-dashed`}>
-						<BiUpload className={`h-32 w-32 text-gray-600`}/>
-						<p>Drag and drop or browse to choose file</p>
-					</div>
+				<div className="row-span-3">
+					{imageUrl ?
+						<div>
+							<img src={imageUrl} alt={'animal'}/>
+						</div>
+						:
+						<Dropzone
+							onDrop={(files: FileWithPath[]) => {
+								uploadFile(files[0], "animals")
+									.then((imageUrl) => {
+										setImageUrl(imageUrl)
+									})
+							}}
+							className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+							<div className="space-y-1 text-center">
+								<svg
+									className="mx-auto h-12 w-12 text-gray-400"
+									stroke="currentColor"
+									fill="none"
+									viewBox="0 0 48 48"
+									aria-hidden="true"
+								>
+									<path
+										d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+										strokeWidth={2}
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+								<div className="flex text-sm text-gray-600">
+									<label
+										htmlFor="file-upload"
+										className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+									>
+										<span>Upload a file</span>
+										<input id="file-upload" name="file-upload" type="file" className="sr-only"/>
+									</label>
+									<p className="pl-1">or drag and drop</p>
+								</div>
+								<p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+							</div>
+						</Dropzone>
+					}
 				</div>
 				<div className={`mt-4 mx-3`}>
 					<input
