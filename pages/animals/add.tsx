@@ -42,8 +42,6 @@ const AnimalAdd = () => {
 		})
 	}
 
-	const [fileState, setFileState] = useState("none");
-
 	const handleImageUpload = async (files: FileWithPath[] | any[]) => {
 		if (!files) {
 			return
@@ -103,32 +101,35 @@ const AnimalAdd = () => {
 						</Dropzone>
 					}
 				</div>
-				{JSON.stringify(imageUrl)}
-				{fileState === "uploading" && <p>Uploading...</p>}
-				{fileState === "uploaded" && <p>Uploaded</p>}
 				<div className={`mt-4 mx-3`}>
 					<input
-						type="email"
-						name="email"
-						id="email"
+						value={nameInput}
+						onChange={e => setNameInput(e.target.value)}
+						type="text"
+						name="name"
+						id="name"
 						className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
 						placeholder="Add Animal Name"
 					/>
 				</div>
 				<div className={`mt-4 mx-3`}>
 					<input
-						type="email"
-						name="email"
-						id="email"
+						value={scientificNameInput}
+						onChange={e => setScientificNameInput(e.target.value)}
+						type="text"
+						name="scientificName"
+						id="scientificName"
 						className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
 						placeholder="Add Scientific Name"
 					/>
 				</div>
 				<div className={`row-span-2 mt-4 mx-3 grid`}>
 					<input
-						type="email"
-						name="email"
-						id="email"
+						value={descriptionInput}
+						onChange={e => setDescriptionInput(e.target.value)}
+						type="text"
+						name="description"
+						id="description"
 						className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
 						placeholder="Add Description"
 					/>
@@ -144,6 +145,7 @@ const AnimalAdd = () => {
 						CANCEL
 					</button>
 					<button
+						onClick={handleSubmitAnimal}
 						type="button"
 						className="grid place-items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
 					>
