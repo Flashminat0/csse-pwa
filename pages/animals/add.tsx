@@ -51,10 +51,19 @@ const AnimalAdd = () => {
 		if (!file) {
 			return
 		}
-		setFileState("uploading")
-		const url = await uploadFile(file , "animals")
-		setFileState("uploaded")
-		setImageUrl(url)
+		const image = new Image()
+		image.src = URL.createObjectURL(file)
+		image.onload = () => {
+			setFileState("uploading")
+
+			uploadFile(file).then(url => {
+				setImageUrl(url)
+				setFileState("uploaded")
+
+			}).catch(err => {
+				toast.error(err)
+			})
+		}
 	}
 
 	return (
