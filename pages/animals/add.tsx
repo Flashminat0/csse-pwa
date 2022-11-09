@@ -60,7 +60,7 @@ const AnimalAdd = () => {
 		image.onload = () => {
 			setFileState("uploading")
 
-			uploadFile(file).then(url => {
+			uploadFile(file , "animals" , "AAAAAAAAAAAAAAAAAAAAAA").then(url => {
 				setImageUrl(url)
 				setFileState("uploaded")
 
