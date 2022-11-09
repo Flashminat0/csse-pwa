@@ -46,11 +46,10 @@ const AnimalAdd = () => {
 
 	const [fileState, setFileState] = useState("none");
 
-	const handleImageUpload = async (files: FileWithPath[] | any[] | null | FileList) => {
+	const handleImageUpload = async (files: FileWithPath[] | any[]) => {
 		if (!files) {
 			return
 		}
-
 		const file = files[0]
 		if (!files[0]) {
 			return
@@ -58,12 +57,8 @@ const AnimalAdd = () => {
 		const image = new Image()
 		image.src = URL.createObjectURL(file)
 		image.onload = () => {
-			setFileState("uploading")
-
-			uploadFile(file , "animals" , "AAAAAAAAAAAAAAAAAAAAAA").then(url => {
+			uploadFile(file, "animals").then(url => {
 				setImageUrl(url)
-				setFileState("uploaded")
-
 			}).catch(err => {
 				toast.error(err)
 			})
@@ -129,14 +124,6 @@ const AnimalAdd = () => {
 						type="email"
 						name="email"
 						id="email"
-						className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
-						placeholder="Add Scientific Name"
-					/>
-					<input
-						type="file"
-						onChange={(e) => {
-							handleImageUpload(e.target.files)
-						}}
 						className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
 						placeholder="Add Scientific Name"
 					/>

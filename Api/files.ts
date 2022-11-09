@@ -2,7 +2,7 @@ import {FirebaseApp} from "@/services/firebase"
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage"
 
 
-export const uploadFile = async (file?: File, place?: string , name? : string) => {
+export const uploadFile = async (file?: File, place?: string, name?: string) => {
 	if (file) {
 		const storage = getStorage(FirebaseApp)
 
