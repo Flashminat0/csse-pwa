@@ -46,7 +46,7 @@ const AnimalAdd = () => {
 
 	const [fileState, setFileState] = useState("none");
 
-	const handleImageUpload = async (files: FileWithPath[] | any[] | null) => {
+	const handleImageUpload = async (files: FileWithPath[] | any[] | null | FileList) => {
 		if (!files) {
 			return
 		}
