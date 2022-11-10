@@ -4,7 +4,7 @@ import {useRouter} from "next/router"
 import {Dropzone, FileWithPath} from "@mantine/dropzone";
 import React, {useState} from "react"
 import {uploadFile} from "@/Api/files"
-import {addAnimal} from "@/Api/Animals"
+import {addAnimal} from "@/Api/animals"
 import {toast} from "react-toastify"
 
 

@@ -1,24 +1,23 @@
-import Page from '@/components/page'
-import Section from '@/components/section'
+import React, {useEffect, useState} from 'react';
 
-const Index = () => (
-	<Page>
-		<Section>
-			<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
-				This is a test
-			</h2>
+const Index = () => {
 
-			<div className='mt-2'>
-				<p className='text-zinc-600 dark:text-zinc-400'>
-					Lorem ipsum dolor sit amet, consectetur.
-				</p>
+	const [token, setToken] = useState<string | null>('');
+	useEffect(() => {
+		localStorage.getItem('token') && setToken(localStorage.getItem('token'));
+	}, [token]);
 
-				<br />
+	const setTokenHandler = () => {
+		localStorage.setItem('token', 'token');
+	}
 
+	return (
+		<div>
+			{JSON.stringify(token)}
+			<button onClick={setTokenHandler}>Set Token</button>
 
-			</div>
-		</Section>
-	</Page>
-)
+		</div>
+	);
+};
 
-export default Index
+export default Index;
