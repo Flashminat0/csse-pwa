@@ -7,7 +7,7 @@ interface Props {
 	children: React.ReactNode
 }
 
-const Page = ({ title, children }: Props) => (
+const Page = ({title, children}: Props) => (
 	<>
 		{title ? (
 			<Head>
@@ -27,7 +27,7 @@ const Page = ({ title, children }: Props) => (
 			<div className="p-6">{children}</div>
 		</main>
 
-		<BottomNav />
+		<BottomNav/>
 	</>
 )
 
