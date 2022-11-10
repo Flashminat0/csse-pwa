@@ -8,7 +8,7 @@ const Index = () => {
 	}, [token]);
 
 	const setTokenHandler = () => {
-		localStorage.setItem('token', 'token');
+		localStorage.setItem('token', token + 'token');
 	}
 
 	return (
@@ -16,7 +16,8 @@ const Index = () => {
 			{JSON.stringify(token)}
 			<button
 				className={`bg-blue-500 text-white px-4 py-2 rounded-md`}
-				onClick={setTokenHandler}>Set Token</button>
+				onClick={setTokenHandler}>Set Token
+			</button>
 
 		</div>
 	);
