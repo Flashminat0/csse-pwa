@@ -7,6 +7,7 @@ class TreeService {
 	constructor() {
 		makeObservable(this, {
 			addTree: action,
+			getAll: action,
 		})
 	}
 
@@ -18,6 +19,9 @@ class TreeService {
 			scientificname: tree.scientificname,
 			description: tree.description,
 		})
+	}
+	async getAll() {
+		return axiosInstance.get('/api/gettrees')
 	}
 }
 

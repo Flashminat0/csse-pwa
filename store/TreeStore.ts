@@ -4,7 +4,7 @@ import { action, makeObservable, observable, toJS } from 'mobx'
 import { toast } from 'react-toastify'
 
 class TreeStore {
-	trees: [] = []
+	trees: any = null
 	treeRes: any = null
 
 	constructor() {
@@ -23,6 +23,15 @@ class TreeStore {
 				toast.success('Successfully Added')
 			}
 			this.treeRes = null
+		}
+	}
+	async getAll() {
+		try {
+			const response = await treeService.getAll()
+			this.trees = response.data
+		} catch (error) {
+		} finally {
+			console.log(this.trees)
 		}
 	}
 }
