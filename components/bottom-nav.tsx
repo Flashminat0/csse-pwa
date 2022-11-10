@@ -32,7 +32,11 @@ const BottomNav = () => {
 			<div className={`h-8 flex items-center`}>
 				<AiOutlineLike className={`h-5 w-5 font-bold scale-125`} />
 			</div>
-			<div className={`h-8 flex items-center`}>
+			<div
+				onClick={async () => {
+					await router.push("/user")
+				}}
+				className={`h-8 flex items-center`}>
 				<AiOutlineUser className={`h-5 w-5 font-bold scale-125`} />
 			</div>
 		</div>

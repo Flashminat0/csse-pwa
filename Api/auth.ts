@@ -16,7 +16,7 @@ export const authUser = async (displayName: string, email: string, photoURL: str
 }
 
 export const checkUser = async () => {
-	const res = await axios.get('/api/test', {
+	const res = await axios.get('/api/user/get-user-data', {
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		}
