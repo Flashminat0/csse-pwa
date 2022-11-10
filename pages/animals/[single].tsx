@@ -46,7 +46,7 @@ const SingleAnimal = () => {
 					</p>
 				</div>
 				<div className={`mt-4 mx-3`}>
-					<p>
+					<p className={`text-lg`}>
 						Scientific Name
 					</p>
 					<p>
@@ -54,7 +54,7 @@ const SingleAnimal = () => {
 					</p>
 				</div>
 				<div className={`row-span-2 mt-4 mx-3 grid`}>
-					<p>
+					<p className={`text-lg`}>
 						Description
 					</p>
 					<p>
@@ -87,10 +87,7 @@ const SingleAnimal = () => {
 							UPDATE
 						</button>
 					</div>
-
 				</div>
-
-
 			</main>}
 		</Page>
 	);

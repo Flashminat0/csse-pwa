@@ -12,12 +12,31 @@ const Search = () => {
 	const fetchAll = async () => {
 		searchEntities("")
 			.then(res => {
-				setEntityList(res.animalResults.map((animal: any) => {
+				const animals = res.animalResults.map((animal: any) => {
 					return {
 						...animal,
 						type: "animal"
 					}
-				}))
+				})
+
+				const trees = res.treeResults.map((plant: any) => {
+					return {
+						...plant,
+						type: "plant"
+					}
+				})
+
+				const locations = res.LocationResults.map((location: any) => {
+					return {
+						...location,
+						type: "location"
+					}
+				})
+
+				const all = [...animals, ...trees, ...locations]
+
+
+				setEntityList(all)
 			})
 	}
 
