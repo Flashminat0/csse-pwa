@@ -1,4 +1,5 @@
 interface ITree {
+	_id?: any
 	name: string
 	scientificname: string
 	image: string | undefined

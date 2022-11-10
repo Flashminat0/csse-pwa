@@ -1,6 +1,9 @@
 interface ILocation {
+	_id?: any
 	address: string
 	district: string
-	image: string | undefined
+	images: string | undefined
+	likes?: string[]
+	publisherId?: string
 }
 export default ILocation
