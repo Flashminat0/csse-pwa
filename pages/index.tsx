@@ -5,8 +5,9 @@ const Index = () => {
 
 	const [token, setToken] = useState<string | null>('');
 	useEffect(() => {
-		localStorage.getItem('token') && setToken(localStorage.getItem('token'));
-	}, [token]);
+		localStorage.removeItem('token');
+	}, []);
+
 
 	const setTokenHandler = () => {
 		localStorage.setItem('token', token + 'token');
@@ -22,6 +23,10 @@ const Index = () => {
 			<button
 				className={`bg-blue-500 text-white px-4 py-2 rounded-md`}
 				onClick={setTokenHandler}>Set Token
+			</button>
+			<button
+				className={`bg-blue-500 text-white px-4 py-2 rounded-md`}
+				onClick={() => setToken(localStorage.getItem('token'))}>Set Token on State
 			</button>
 
 		</div>
