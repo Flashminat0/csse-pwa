@@ -34,9 +34,9 @@ const AnimalAdd = () => {
 			scientificNameInput,
 			descriptionInput,
 			imageUrl
-		}).then(message => {
+		}).then(async message => {
 			toast.success(message)
-			// router.push("/animals/")
+			await router.push("/search/")
 		}).catch(err => {
 			toast.error(err)
 		})
@@ -61,7 +61,7 @@ const AnimalAdd = () => {
 
 	return (
 		<Page title={`Add Animal`}>
-			<main className={`grid grid-rows-6 h-full`}>
+			<main className={`flex flex-col h-full`}>
 				<div className="row-span-3 mx-3">
 					{imageUrl ?
 						<div>
@@ -132,10 +132,10 @@ const AnimalAdd = () => {
 					/>
 				</div>
 				<div className={`row-span-2 mt-4 mx-3 grid`}>
-					<input
+					<textarea
 						value={descriptionInput}
 						onChange={e => setDescriptionInput(e.target.value)}
-						type="text"
+						rows={6}
 						name="description"
 						id="description"
 						className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
@@ -147,6 +147,9 @@ const AnimalAdd = () => {
 				</div>
 				<div className={`grid grid-cols-2 gap-4 mx-5 mt-8`}>
 					<button
+						onClick={async () => {
+							await router.push('/search')
+						}}
 						type="button"
 						className="grid place-items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
 					>
