@@ -10,7 +10,7 @@ const App = ({Component, pageProps}: AppProps) => {
 	return (
 		<Provider store={store}>
 			<Component {...pageProps} />
-			<ToastContainer/>
+			<ToastContainer position={`bottom-center`}/>
 		</Provider>
 	)
 }
