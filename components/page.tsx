@@ -1,5 +1,4 @@
 import Head from "next/head"
-import Appbar from "@/components/appbar"
 import BottomNav from "@/components/bottom-nav"
 
 interface Props {

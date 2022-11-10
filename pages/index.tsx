@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {toast} from "react-toastify";
 import {useRouter} from "next/router";
-import {awaitExpression} from "@babel/types";
+import Page from "@/components/page";
 
 const Index = () => {
 	const router = useRouter()
@@ -26,14 +25,17 @@ const Index = () => {
 	}, [token]);
 
 	return (
-		<div>
-			{token}
+		<Page>
+			{token && "Token present"}
 			<button
 				className={`bg-blue-500 text-white px-4 py-2 rounded-md`}
 				onClick={() => localStorage.removeItem('token')}>Remove Token
 			</button>
-
-		</div>
+			<div className="flex flex-col items-center justify-center h-full">
+				<h1 className="text-4xl font-bold text-center">Welcome to Earth Index</h1>
+				<p className="text-center">Please login to continue</p>
+			</div>
+		</Page>
 	);
 };
 
