@@ -1,24 +1,42 @@
-import Page from '@/components/page'
-import Section from '@/components/section'
+import React, {useEffect, useState} from 'react';
+import {useRouter} from "next/router";
+import Page from "@/components/page";
 
-const Index = () => (
-	<Page>
-		<Section>
-			<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
-				This is a test
-			</h2>
+const Index = () => {
+	const router = useRouter()
 
-			<div className='mt-2'>
-				<p className='text-zinc-600 dark:text-zinc-400'>
-					Lorem ipsum dolor sit amet, consectetur.
-				</p>
+	const [token, setToken] = useState<string | null>('');
+	const [locationLoaded, setLocationLoaded] = useState(false);
 
-				<br />
+	useEffect(() => {
+		setToken(localStorage.getItem('token'));
+		setLocationLoaded(true);
+	}, [router.pathname])
 
+	useEffect(() => {
+		const kickToAuthPage = async () => {
+			await router.push('/auth');
+		}
 
+		if (!token && locationLoaded) {
+			kickToAuthPage();
+		}
+
+	}, [token]);
+
+	return (
+		<Page>
+			{token && "Token present"}
+			<button
+				className={`bg-blue-500 text-white px-4 py-2 rounded-md`}
+				onClick={() => localStorage.removeItem('token')}>Remove Token
+			</button>
+			<div className="flex flex-col items-center justify-center h-full">
+				<h1 className="text-4xl font-bold text-center">Welcome to Earth Index</h1>
+				<p className="text-center">Please login to continue</p>
 			</div>
-		</Section>
-	</Page>
-)
+		</Page>
+	);
+};
 
-export default Index
+export default Index;
