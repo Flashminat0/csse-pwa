@@ -1,4 +1,5 @@
 import ITree from '@/interfaces/trees/ITrees'
+import { toJS } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -10,21 +11,33 @@ const View = () => {
 	const [fetch, setFetch] = useState(false)
 
 	useEffect(() => {
-		if (!treeStore.trees && !fetch) {
-			treeStore.getAll()
+		if (!treeStore.myTrees && !fetch) {
+			treeStore.userPosts()
 			setFetch(true)
 		}
-		if (treeStore.trees) {
-			setTrees(treeStore.trees)
+		if (treeStore.myTrees) {
+			setTrees(treeStore.myTrees)
 		}
-	}, [treeStore.trees])
+	}, [treeStore.myTrees])
+
+	const selectOne = (id: string) => {
+		router.push({
+			pathname: '/trees/edit',
+			query: { id: id },
+		})
+	}
 
 	return (
 		<div className='h-full w-full'>
 			<div className='space-y-5 rounded-lg'>
 				{trees?.map((tree: ITree, idx: any) => (
 					<div className='space-y-5 rounded-lg bg-gray-100 p-3' key={idx}>
-						<section className='flex'>
+						<section
+							className='flex'
+							onClick={() => {
+								selectOne(tree._id)
+							}}
+						>
 							<div className='w-2/3'>
 								<img src={tree.image} />
 							</div>
@@ -55,7 +68,7 @@ const View = () => {
 				<div className='flex space-x-5'>
 					<button
 						onClick={() => {
-							router.push('/')
+							router.push('/trees/view')
 						}}
 						type='button'
 						className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
@@ -72,15 +85,6 @@ const View = () => {
 						Add
 					</button>
 				</div>
-				<button
-					type='button'
-					className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-					onClick={() => {
-						router.push('/trees/my-posts')
-					}}
-				>
-					My Posts
-				</button>
 			</div>
 		</div>
 	)

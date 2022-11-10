@@ -129,6 +129,7 @@ const Index = () => {
 						value={name}
 						className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
 						placeholder='Add Tree Name'
+						required
 					/>
 				</div>
 				<div className='rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-green-600 focus-within:ring-1 focus-within:ring-green-600'>
@@ -142,10 +143,11 @@ const Index = () => {
 						value={sciName}
 						className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
 						placeholder='Add Scientific Name'
+						required
 					/>
 				</div>
 				<div className='grid w-full grid-cols-3 gap-5 px-2'>
-					{Tags.map((tag: string , idx : any) => (
+					{Tags.map((tag: string, idx: any) => (
 						<div
 							key={idx}
 							className='grid h-8 w-20 scale-125 place-items-center rounded-full bg-gradient-to-b from-green-300 to-blue-400 text-center'
@@ -198,6 +200,7 @@ const Index = () => {
 							placeholder='Add Description'
 							name='comment'
 							id='comment'
+							required
 							className='block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm'
 						/>
 					</div>
