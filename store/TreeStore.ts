@@ -2,6 +2,7 @@ import { treeService } from '@/Api/services/serviceInitializer'
 import ITree from '@/interfaces/trees/ITrees'
 import { action, makeObservable, observable, toJS } from 'mobx'
 import { toast } from 'react-toastify'
+import { loading } from './storeInitializer'
 
 class TreeStore {
 	trees: any = null
@@ -24,6 +25,7 @@ class TreeStore {
 	}
 	async addTree(tree: ITree) {
 		try {
+			loading.setLoading(true)
 			this.treeRes = null
 			const response = await treeService.addTree(tree)
 			this.treeRes = response
@@ -35,29 +37,33 @@ class TreeStore {
 			} else {
 				toast.error('Something went wrong')
 			}
+			loading.setLoading(false)
 			this.treeRes = null
 		}
 	}
 	async getAll() {
 		try {
+			loading.setLoading(true)
 			const response = await treeService.getAll()
 			this.trees = response.data
 		} catch (error) {
 		} finally {
-			console.log(this.trees)
+			loading.setLoading(false)
 		}
 	}
 	async userPosts() {
 		try {
+			loading.setLoading(true)
 			const response = await treeService.myPosts()
 			this.myTrees = response.data
 		} catch (error) {
 		} finally {
-			console.log(this.myTrees)
+			loading.setLoading(false)
 		}
 	}
 	async update(tree: ITree) {
 		try {
+			loading.setLoading(true)
 			this.treeRes = null
 			const response = await treeService.update(tree)
 			this.treeRes = response
@@ -69,19 +75,23 @@ class TreeStore {
 			} else {
 				toast.error('Something went Wrong')
 			}
+			loading.setLoading(false)
 		}
 	}
 	async getOne(id: any) {
 		try {
+			loading.setLoading(true)
 			this.tree = null
 			const response = await treeService.getOne(id)
 			this.tree = response.data
 		} catch (error) {
 		} finally {
+			loading.setLoading(false)
 		}
 	}
 	async delete(id: any) {
 		try {
+			loading.setLoading(true)
 			this.treeRes = null
 			const response = await treeService.delete(id)
 			this.treeRes = response
@@ -91,6 +101,7 @@ class TreeStore {
 		} catch (error) {
 			console.error(error)
 		} finally {
+			loading.setLoading(false)
 			this.userPosts()
 			this.getAll()
 		}

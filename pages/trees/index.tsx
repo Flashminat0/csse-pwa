@@ -4,7 +4,7 @@ import { BiUpload } from 'react-icons/bi'
 import { uploadFile } from '@/Api/files'
 import { toast } from 'react-toastify'
 import ITree from '@/interfaces/trees/ITrees'
-import { treeStore } from '../../store/storeInitializer'
+import { loading, treeStore } from '../../store/storeInitializer'
 
 const Index = () => {
 	const [files, setFile] = useState<any>()
@@ -28,6 +28,7 @@ const Index = () => {
 		}
 	}
 	const submitHandler = () => {
+		loading.setLoading(false)
 		const tree: ITree = {
 			name: name,
 			scientificname: sciName,
@@ -44,6 +45,7 @@ const Index = () => {
 
 	//ImageUpload
 	const handleImageUpload = async (event: any) => {
+		loading.setLoading(true)
 		event.preventDefault()
 		if (!files) {
 			return
@@ -166,7 +168,7 @@ const Index = () => {
 					<div className='mt-1 flex rounded-md shadow-sm'>
 						<div className='relative flex flex-grow items-stretch focus-within:z-10'>
 							<input
-								type='email'
+								type='text'
 								name='email'
 								id='email'
 								onChange={(e) => {

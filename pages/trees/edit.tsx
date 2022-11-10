@@ -1,11 +1,12 @@
 import { uploadFile } from '@/Api/files'
 import ITree from '@/interfaces/trees/ITrees'
+import { Modal } from '@mantine/core'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { treeStore } from '../../store/storeInitializer'
+import { loading, treeStore } from '../../store/storeInitializer'
 
 const Edit = () => {
 	const router = useRouter()
@@ -20,6 +21,7 @@ const Edit = () => {
 	const [newImage, setNewImage] = useState<string | undefined>()
 	const [newFile, setNewFile] = useState<any>()
 	const [newTag, setNewTag] = useState('')
+	const [opened, setOpened] = useState<boolean>(false)
 
 	const [toggle, setToggle] = useState(false)
 	useEffect(() => {
@@ -56,6 +58,7 @@ const Edit = () => {
 
 	const handleImageUpload = async (event: any) => {
 		event.preventDefault()
+		loading.setLoading(true)
 		if (!newFile) {
 			submitHandler()
 		} else {
@@ -83,6 +86,7 @@ const Edit = () => {
 	}, [newImage])
 
 	const submitHandler = () => {
+		loading.setLoading(false)
 		const tree: ITree = {
 			_id: id,
 			name: name,
@@ -106,6 +110,21 @@ const Edit = () => {
 
 	return (
 		<div className='pb-20'>
+			<Modal
+				opened={opened}
+				onClose={() => setOpened(false)}
+				title='Are you sure want to delete?'
+			>
+				<button
+					className='rounded-lg bg-red-400 px-4 py-2 hover:bg-red-400'
+					onClick={() => {
+						deleteLocation()
+						setOpened(false)
+					}}
+				>
+					Delete
+				</button>
+			</Modal>
 			{name && (
 				<div className='space-y-5 rounded-lg bg-gray-100 p-3'>
 					<form
@@ -259,7 +278,7 @@ const Edit = () => {
 						<section>
 							<button
 								onClick={() => {
-									deleteLocation()
+									setOpened(true)
 								}}
 								type='button'
 								className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'

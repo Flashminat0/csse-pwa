@@ -4,7 +4,7 @@ import { BiUpload } from 'react-icons/bi'
 import { uploadFile } from '@/Api/files'
 import { toast } from 'react-toastify'
 import ILocation from '@/interfaces/locations/ILocation'
-import { locationStore } from '../../store/storeInitializer'
+import { loading, locationStore } from '../../store/storeInitializer'
 
 const Index = () => {
 	const [files, setFile] = useState<any>()
@@ -44,6 +44,7 @@ const Index = () => {
 
 	useEffect(() => {
 		if (imageUrl) {
+			loading.setLoading(false)
 			submitHandler()
 		}
 	}, [imageUrl])
@@ -51,6 +52,7 @@ const Index = () => {
 	//ImageUpload
 	const handleImageUpload = async (event: any) => {
 		event.preventDefault()
+		loading.setLoading(true)
 		if (!files) {
 			return
 		}

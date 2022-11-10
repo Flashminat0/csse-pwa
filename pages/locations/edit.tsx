@@ -1,10 +1,11 @@
 import { uploadFile } from '@/Api/files'
 import ILocation from '@/interfaces/locations/ILocation'
+import { Modal } from '@mantine/core'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { locationStore } from '../../store/storeInitializer'
+import { loading, locationStore } from '../../store/storeInitializer'
 
 const Edit = () => {
 	const router = useRouter()
@@ -15,12 +16,13 @@ const Edit = () => {
 	const [description, setDescription] = useState('')
 	const [toggle, setToggle] = useState(false)
 	const [newImage, setNewImage] = useState<string | undefined>()
+	const [opened, setOpened] = useState<boolean>(false)
 
 	useEffect(() => {
-		if (router) {
+		if (router.isReady) {
 			locationStore.getOne(id)
 		}
-	}, [router])
+	}, [router.isReady])
 
 	useEffect(() => {
 		if (locationStore.oneLocation) {
@@ -42,6 +44,7 @@ const Edit = () => {
 
 	const handleImageUpload = async (event: any) => {
 		event.preventDefault()
+		loading.setLoading(true)
 		if (!newFile) {
 			submitHandler()
 		} else {
@@ -69,6 +72,7 @@ const Edit = () => {
 	}, [newImage])
 
 	const submitHandler = async () => {
+		loading.setLoading(false)
 		const location: ILocation = {
 			_id: id,
 			address: address,
@@ -78,18 +82,27 @@ const Edit = () => {
 		await locationStore.Update(location)
 	}
 
-	useEffect(() => {
-		if (newFile) {
-			submitHandler()
-		}
-	}, [newFile])
-
 	const deleteLocation = () => {
 		locationStore.delete(id)
 	}
 
 	return (
 		<div>
+			<Modal
+				opened={opened}
+				onClose={() => setOpened(false)}
+				title='Are you sure want to delete?'
+			>
+				<button
+					className='rounded-lg bg-red-400 px-4 py-2 hover:bg-red-400'
+					onClick={() => {
+						deleteLocation()
+						setOpened(false)
+					}}
+				>
+					Delete
+				</button>
+			</Modal>
 			{locationStore.oneLocation && (
 				<div className='space-y-5 rounded-lg bg-gray-100 p-3'>
 					<form
@@ -187,7 +200,7 @@ const Edit = () => {
 						<section>
 							<button
 								onClick={() => {
-									deleteLocation()
+									setOpened(true)
 								}}
 								type='button'
 								className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
