@@ -10,7 +10,7 @@ const BottomNav = () => {
 		<div className={`bg-white border rounded-t-md fixed bottom-0 left-0 w-screen h-16 flex justify-around items-center border-gray-300`}>
 			<div
 				onClick={async () => {
-					await router.push("/home")
+					await router.push("/")
 				}}
 				className={`h-8 flex items-center`}>
 				<AiOutlineHome className={`h-5 w-5 font-bold scale-125`} />
