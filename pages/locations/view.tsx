@@ -9,23 +9,18 @@ const View = () => {
 	const [locations, setLocations] = useState<ILocation[]>()
 	const [likes, setLikes] = useState<any[]>([])
 	const [user, setUser] = useState<string>()
+	const [fetch, setFetch] = useState(false)
 
 	useEffect(() => {
-		if (!locationStore.locations) {
+		if (!locationStore.locations && !fetch) {
 			locationStore.getAll()
+			setFetch(true)
 		}
 		if (locationStore.locations) {
 			setLocations(locationStore.locations)
 			setUser(locationStore.userId)
 		}
 	}, [locationStore.locations])
-
-	const selectOne = (id: string) => {
-		router.push({
-			pathname: '/location/edit',
-			query: { id: id },
-		})
-	}
 
 	const likePost = async (id: string) => {
 		await locationStore.likePost(id)
@@ -52,12 +47,7 @@ const View = () => {
 							className='space-y-5 rounded-lg bg-gray-100 p-3'
 							key={location._id}
 						>
-							<section
-								className='flex w-full justify-center overflow-hidden rounded-lg'
-								onClick={() => {
-									selectOne(location._id)
-								}}
-							>
+							<section className='flex w-full justify-center overflow-hidden rounded-lg'>
 								<img src={location.images} className='w-full' />
 							</section>
 							<section className='flex justify-between py-2'>
@@ -93,7 +83,7 @@ const View = () => {
 						</div>
 					))}
 			</div>
-			<div className='sticky bottom-0 z-10 bg-gray-50 px-3 py-2'>
+			<div className='sticky bottom-0 z-10 bg-gray-50 px-3 py-2 space-y-3'>
 				<div className='flex space-x-5'>
 					<button
 						onClick={() => {
@@ -108,12 +98,21 @@ const View = () => {
 						type='submit'
 						className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
 						onClick={() => {
-							router.push('location/add')
+							router.push('/locations')
 						}}
 					>
 						Add
 					</button>
 				</div>
+				<button
+					type='submit'
+					className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
+					onClick={() => {
+						router.push('/locations/my-posts')
+					}}
+				>
+					My Posts
+				</button>
 			</div>
 		</div>
 	)

@@ -8,6 +8,10 @@ class TreeService {
 		makeObservable(this, {
 			addTree: action,
 			getAll: action,
+			myPosts: action,
+			getOne: action,
+			update: action,
+			delete: action,
 		})
 	}
 
@@ -22,6 +26,27 @@ class TreeService {
 	}
 	async getAll() {
 		return axiosInstance.get('/api/gettrees')
+	}
+	async myPosts() {
+		return axiosInstance.get('/api/getuserposts')
+	}
+
+	async update(tree: ITree) {
+		return axiosInstance.put('/api/updatepost', {
+			postId: tree._id,
+			name: tree.name,
+			image: tree.image,
+			tags: tree.tags,
+			scientificname: tree.scientificname,
+			description: tree.description,
+		})
+	}
+
+	async getOne(id: string) {
+		return axiosInstance.get(`/api/getOneUpdate?postId=${id}`)
+	}
+	async delete(postId: string) {
+		return axiosInstance.delete('/api/deleteTree', { data: { postId } })
 	}
 }
 

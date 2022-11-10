@@ -120,6 +120,7 @@ const Index = () => {
 						value={address}
 						className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
 						placeholder='Home Location Address'
+						required
 					/>
 				</div>
 				<div>
@@ -134,7 +135,7 @@ const Index = () => {
 							name='comment'
 							id='comment'
 							className='block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm'
-							defaultValue={''}
+							required
 						/>
 					</div>
 				</div>
