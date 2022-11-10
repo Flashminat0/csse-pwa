@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { BiUpload } from 'react-icons/bi'
 import { uploadFile } from '@/Api/files'
 import { toast } from 'react-toastify'
-import ITree from '@/interfaces/locations/ITrees'
+import ITree from '@/interfaces/trees/ITrees'
 import { treeStore } from '../../store/storeInitializer'
 
 const Index = () => {
@@ -36,7 +36,6 @@ const Index = () => {
 			description: description,
 		}
 		treeStore.addTree(tree)
-		// router.push('/trees')
 	}
 
 	const addTags = (tag: string) => {
