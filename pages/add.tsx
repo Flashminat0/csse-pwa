@@ -19,7 +19,11 @@ const Add = () => {
 
 
 				</div>
-				<div className={` bg-white grid grid-cols-12 p-4 border border-gray-300 m-4`}>
+				<div
+				onClick={async () => {
+					await router.push("/locations")
+				}}
+				className={` bg-white grid grid-cols-12 p-4 border border-gray-300 m-4`}>
 					<div className={`col-span-4 `}>
 						<img src="https://www.gardeningknowhow.com/wp-content/uploads/2017/07/hardwood-tree.jpg"
 							 alt="tree"
@@ -30,7 +34,11 @@ const Add = () => {
 						ADD TREE CONTENT
 					</div>
 				</div>
-				<div className={`bg-white grid grid-cols-12 p-4 border border-gray-300 mx-4 mb-4`}>
+				<div 
+				onClick={async () => {
+					await router.push("/trees")
+				}}
+				className={`bg-white grid grid-cols-12 p-4 border border-gray-300 mx-4 mb-4`}>
 					<div className={`col-span-4 `}>
 						<img
 							src="https://media.istockphoto.com/photos/tropical-beach-in-sri-lanka-picture-id498615566?k=20&m=498615566&s=612x612&w=0&h=ZOBPS4fUtCApIfTCgUVu4Zduh2M95ikn9wG0WhVFHtQ="
