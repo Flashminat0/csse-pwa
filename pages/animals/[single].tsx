@@ -60,6 +60,16 @@ const SingleAnimal = () => {
 		}
 	}, [animal]);
 
+	const pushToEnhanceViewPage = async () => {
+		await router.push({
+			pathname: '/enhancements/view',
+			query: {
+				id: animal._id,
+				type : "animal"
+			}
+		})
+	}
+
 	return (
 		<Page>
 			{animal &&
@@ -128,6 +138,7 @@ const SingleAnimal = () => {
 					</div>
 					<div className={`px-4 w-full`}>
 						<button
+							onClick={pushToEnhanceViewPage}
 							type="button"
 							className="w-full flex flex-row items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
 						>

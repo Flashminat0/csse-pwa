@@ -22,7 +22,7 @@ const Search = () => {
 				const trees = res.treeResults.map((plant: any) => {
 					return {
 						...plant,
-						type: "plant"
+						type: "tree"
 					}
 				})
 
@@ -57,6 +57,12 @@ const Search = () => {
 	const onClickSingleEntity = async (entity: any) => {
 		if (entity.type === "animal") {
 			await router.push(`/animals/${entity._id}`)
+		}
+		if (entity.type === "tree") {
+			await router.push(`/trees/onetree?id=${entity._id}`)
+		}
+		if (entity.type === "location") {
+			await router.push(`/locations/onelocation?id=${entity._id}`)
 		}
 	}
 
