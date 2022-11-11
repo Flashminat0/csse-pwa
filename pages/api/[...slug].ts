@@ -3,7 +3,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 
 export default (req: NextApiRequest, res: NextApiResponse) =>
 	httpProxyMiddleware(req, res, {
-		target: `http://localhost:8000/api/`,
+		target: `https://uee-backend-pwa.herokuapp.com/api/`,
 		pathRewrite: [
 			{
 				patternStr: '^/api',
