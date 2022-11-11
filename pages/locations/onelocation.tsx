@@ -128,6 +128,7 @@ const Edit = () => {
 															type='file'
 															className='sr-only'
 															onChange={setFiles}
+															disabled
 														/>
 													</label>
 													<p className='text-xs text-gray-500'>
@@ -148,24 +149,14 @@ const Edit = () => {
 														strokeLinejoin='round'
 													/>
 												</svg>
-												<p
-													className='text-xs text-gray-500'
-													onClick={() => {
-														setToggle(!toggle)
-													}}
-												>
+												<p className='text-xs text-gray-500'>
 													Browse to choose a file
 												</p>
 											</div>
 										</div>
 									</div>
 								) : (
-									<section
-										className='w-full'
-										onClick={() => {
-											setToggle(!toggle)
-										}}
-									>
+									<section className='w-full'>
 										<img src={image} className='w-full' />
 									</section>
 								)}
@@ -181,6 +172,7 @@ const Edit = () => {
 									value={address}
 									className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
 									placeholder='Home Location Address'
+									disabled
 								/>
 							</div>
 							<div>
@@ -195,37 +187,9 @@ const Edit = () => {
 										name='comment'
 										id='comment'
 										className='block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm'
-										defaultValue={''}
+										disabled
 									/>
 								</div>
-							</div>
-							<section>
-								<button
-									onClick={() => {
-										setOpened(true)
-									}}
-									type='button'
-									className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
-								>
-									Delete
-								</button>
-							</section>
-							<div className='flex space-x-5'>
-								<button
-									onClick={() => {
-										router.push('/locations/my-posts')
-									}}
-									type='button'
-									className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-								>
-									Cancel
-								</button>
-								<button
-									type='submit'
-									className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-								>
-									Update
-								</button>
 							</div>
 						</form>
 					</div>

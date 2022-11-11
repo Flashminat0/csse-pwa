@@ -1,3 +1,4 @@
+import Page from '@/components/page'
 import ILocation from '@/interfaces/locations/ILocation'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
@@ -39,82 +40,84 @@ const View = () => {
 	}
 
 	return (
-		<div className='h-full w-full'>
-			<div className='space-y-5 rounded-lg'>
-				{locations &&
-					locations.map((location: ILocation) => (
-						<div
-							className='space-y-5 rounded-lg bg-gray-100 p-3'
-							key={location._id}
-						>
-							<section className='flex w-full justify-center overflow-hidden rounded-lg'>
-								<img src={location.images} className='w-full' />
-							</section>
-							<section className='flex justify-between py-2'>
-								<div>{location.address}</div>
-								<div
-									className='flex space-x-3'
-									onClick={() => {
-										likePost(location._id)
-									}}
-								>
+		<Page title='View Locations'>
+			<div className='h-full w-full'>
+				<div className='space-y-5 rounded-lg'>
+					{locations &&
+						locations.map((location: ILocation) => (
+							<div
+								className='space-y-5 rounded-lg bg-gray-100 p-3'
+								key={location._id}
+							>
+								<section className='flex w-full justify-center overflow-hidden rounded-lg'>
+									<img src={location.images} className='w-full' />
+								</section>
+								<section className='flex justify-between py-2'>
+									<div>{location.address}</div>
 									<div
-										className={`${
-											isLiked(location.likes)
-												? 'animate-pulse font-extrabold text-red-500'
-												: ''
-										}`}
+										className='flex space-x-3'
+										onClick={() => {
+											likePost(location._id)
+										}}
 									>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											viewBox='0 0 24 24'
-											fill='currentColor'
-											className='h-6 w-6'
+										<div
+											className={`${
+												isLiked(location.likes)
+													? 'animate-pulse font-extrabold text-red-500'
+													: ''
+											}`}
 										>
-											<path d='M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z' />
-										</svg>
+											<svg
+												xmlns='http://www.w3.org/2000/svg'
+												viewBox='0 0 24 24'
+												fill='currentColor'
+												className='h-6 w-6'
+											>
+												<path d='M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z' />
+											</svg>
+										</div>
+										<p>{location.likes?.length} Likes</p>
 									</div>
-									<p>{location.likes?.length} Likes</p>
-								</div>
-							</section>
-							<section className='h-52 bg-blue-300'>
-								<p className='p-2'>{location.district}</p>
-							</section>
-						</div>
-					))}
-			</div>
-			<div className='sticky bottom-0 z-10 bg-gray-50 px-3 py-2 space-y-3'>
-				<div className='flex space-x-5'>
-					<button
-						onClick={() => {
-							router.push('/')
-						}}
-						type='button'
-						className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-					>
-						Cancel
-					</button>
+								</section>
+								<section className='h-52 bg-blue-300'>
+									<p className='p-2'>{location.district}</p>
+								</section>
+							</div>
+						))}
+				</div>
+				<div className='sticky bottom-0 z-10 space-y-3 bg-gray-50 px-3 py-2'>
+					<div className='flex space-x-5'>
+						<button
+							onClick={() => {
+								router.push('/')
+							}}
+							type='button'
+							className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
+						>
+							Cancel
+						</button>
+						<button
+							type='submit'
+							className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
+							onClick={() => {
+								router.push('/locations')
+							}}
+						>
+							Add
+						</button>
+					</div>
 					<button
 						type='submit'
 						className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
 						onClick={() => {
-							router.push('/locations')
+							router.push('/locations/my-posts')
 						}}
 					>
-						Add
+						My Posts
 					</button>
 				</div>
-				<button
-					type='submit'
-					className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-					onClick={() => {
-						router.push('/locations/my-posts')
-					}}
-				>
-					My Posts
-				</button>
 			</div>
-		</div>
+		</Page>
 	)
 }
 
