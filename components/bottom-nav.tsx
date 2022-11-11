@@ -29,7 +29,11 @@ const BottomNav = () => {
 				className={`h-8  bg-gradient-to-b from-green-300 to-blue-400 w-20 rounded-full text-center grid place-items-center scale-125`}>
 				<AiOutlinePlus className={`h-5 w-5 font-bold scale-125 text-white`} />
 			</div>
-			<div className={`h-8 flex items-center`}>
+			<div className={`h-8 flex items-center`}
+				 onClick={async () => {
+					 await router.push("/locations/view")
+				 }}
+			>
 				<AiOutlineLike className={`h-5 w-5 font-bold scale-125`} />
 			</div>
 			<div
