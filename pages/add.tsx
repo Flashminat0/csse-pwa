@@ -21,7 +21,7 @@ const Add = () => {
 				</div>
 				<div
 				onClick={async () => {
-					await router.push("/locations")
+					await router.push("/trees")
 				}}
 				className={` bg-white grid grid-cols-12 p-4 border border-gray-300 m-4`}>
 					<div className={`col-span-4 `}>
@@ -35,8 +35,9 @@ const Add = () => {
 					</div>
 				</div>
 				<div 
+				
 				onClick={async () => {
-					await router.push("/trees")
+					await router.push("/locations")
 				}}
 				className={`bg-white grid grid-cols-12 p-4 border border-gray-300 mx-4 mb-4`}>
 					<div className={`col-span-4 `}>
