@@ -169,12 +169,7 @@ const Edit = () => {
 													strokeLinejoin='round'
 												/>
 											</svg>
-											<p
-												className='text-xs text-gray-500'
-												onClick={() => {
-													setToggle(!toggle)
-												}}
-											>
+											<p className='text-xs text-gray-500'>
 												Browse to choose a file
 											</p>
 										</div>
@@ -199,6 +194,7 @@ const Edit = () => {
 										setName(e.target.value)
 									}}
 									value={name}
+									disabled
 									className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
 									placeholder='Add Tree Name'
 								/>
@@ -208,6 +204,7 @@ const Edit = () => {
 									type='text'
 									name='name'
 									id='name'
+									disabled
 									onChange={(e) => {
 										setSciName(e.target.value)
 									}}
@@ -238,29 +235,6 @@ const Edit = () => {
 								>
 									Add Tags
 								</label>
-								<div className='mt-1 flex rounded-md shadow-sm'>
-									<div className='relative flex flex-grow items-stretch focus-within:z-10'>
-										<input
-											name='email'
-											id='email'
-											onChange={(e) => {
-												setNewTag(e.target.value)
-											}}
-											value={newTag}
-											className='block w-full rounded-none rounded-l-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-											placeholder='Insert Tag'
-										/>
-									</div>
-									<button
-										onClick={() => {
-											addTags(newTag)
-										}}
-										type='button'
-										className='relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500'
-									>
-										<span>Add</span>
-									</button>
-								</div>
 							</div>
 							<div>
 								<div className='mt-1'>
@@ -273,37 +247,10 @@ const Edit = () => {
 										placeholder='Add Description'
 										name='comment'
 										id='comment'
+										disabled
 										className='block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm'
 									/>
 								</div>
-							</div>
-							<section>
-								<button
-									onClick={() => {
-										setOpened(true)
-									}}
-									type='button'
-									className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
-								>
-									Delete
-								</button>
-							</section>
-							<div className='flex space-x-5'>
-								<button
-									onClick={() => {
-										router.push('/trees/view')
-									}}
-									type='button'
-									className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-								>
-									Cancel
-								</button>
-								<button
-									type='submit'
-									className='inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-								>
-									Update
-								</button>
 							</div>
 						</form>
 					</div>
